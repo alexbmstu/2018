@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat 10*.md >> 1.txt
+cat 10*.md > 1.txt
 cat 20*.md >> 1.txt
 #cat 30*.md >> 1.txt
 #cat 40*.md >> 1.txt
