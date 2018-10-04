@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cat 00*.md > 1.txt
 cat 10*.md >> 1.txt
 cat 20*.md >> 1.txt
 #cat 30*.md >> 1.txt
@@ -18,3 +17,6 @@ sed -i 's/#/- [/g' toc.txt
 sed -i 's/ <a name="/](#/g' toc.txt
 sed -i 's/<a name="/](#/g' toc.txt
 sed -i 's/"><\/a>/)/g' toc.txt
+
+cp title.txt 00-info.md
+cat toc.txt >> 00-info.md
