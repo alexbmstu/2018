@@ -40,13 +40,10 @@ Raspberry Pi 3 Model B предоставляет 4 USB-порта, объеди
 На Raspberry Pi Model B+ доступен Ethernet-адаптер на 10/100 Мбит с выходом на стандартное гнездо 8P8C (RJ45).
 
 ****
-## Распиновка платы <a name="23"></a>
+## Распиновка платы и подключение питания<a name="23"></a>
 
 ![Распиновка Raspberry](assets/raspberry02.jpg)
 **Распиновка Raspberry**
-
-****
-## Питание <a name="24"></a>
 
 Raspberry Pi Model B+ может быть запитана через microUSB-кабель или через пины питания.
 Номинальное напряжение питания — 5 В. Компьютер потребляет до 800 мА без внешних устройств.
@@ -78,7 +75,7 @@ sudo raspi-config.
 Выберите опцию `Localisation Options`. Далее опцию `Change locale`. И далее выберите локализацию `ru_RU.UTF-8`.
 
 ****
-## Создание загрузочной SD карты :<a name="251"></a> 
+## Создание загрузочной SD карты <a name="251"></a> 
 
 Если Вы решили использовать образ SD карты с операционной системой `Raspbian` c официального сайта Raspbery Pi [https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/) вам необходимо выполнить запись образа, например с помощью команды `dd`:
 
