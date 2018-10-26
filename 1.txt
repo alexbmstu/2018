@@ -602,6 +602,7 @@ unzip server.zip
 ## Установка программного обеспечения для разработки мобильных приложений на OS Android <a name="32"></a>
 
 Если вы решили делать приложение для Android, вам потребуются следующие компоненты:
+
 * AndroidStudio
 * Нужный нам SDK для AndroidStudio
 * Android телефон
@@ -614,6 +615,7 @@ unzip server.zip
 ### Установка Android Studio <a name="321"></a>
 
 Переходим на сайт [https://developer.android.com/studio/](https://developer.android.com/studio/)
+
 Скачиваем и устанавливаем `Android Studio` на компьютер (желательно исопльзовать ОС Linux). В ходе установки загружаем все предлагаемые подпункты.
 
 
@@ -631,7 +633,7 @@ unzip server.zip
 
 Далее необходимо скачать нужный SDK из соответствующего раздела меню.
 
-![Выбор версии ОС](assets/Android-SDK-24.4.1-Latest-Version-Download.pnd)
+![Выбор версии ОС](assets/Android-SDK-24.4.1-Latest-Version-Download.png)
 **Выбор версии ОС**
 
 ### Android телефон, Google аккаунт, Приложение Google Fit <a name="323"></a>
@@ -641,7 +643,8 @@ unzip server.zip
 
 Далее запустите приложение и войдите под созданным аккаунтом. Теперь вам можно начать собирать данные, например, начав ходить по аудитории.  ПРоверьте, что данные корректно фиксируются в приложении `GoogleFit`.
 
-
+![Приложение Google Fit](assets/GoogleFit.pnd)
+**Приложение Google Fit**
 
 
 
