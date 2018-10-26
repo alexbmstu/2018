@@ -7,6 +7,8 @@ cat 20*.md >> 1.txt
 #cat 50*.md >> 1.txt
 #cat 60*.md >> 1.txt
 #cat 70*.md >> 1.txt
+#cat 80*.md >> 1.txt
+cat 9*.md >> 1.txt
 cat appendix.md >> 1.txt
 cat 1.txt | grep \^\#  > toc.txt
 sed -i 's/# /#/g' toc.txt

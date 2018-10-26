@@ -140,13 +140,10 @@ Raspberry Pi 3 Model B предоставляет 4 USB-порта, объеди
 На Raspberry Pi Model B+ доступен Ethernet-адаптер на 10/100 Мбит с выходом на стандартное гнездо 8P8C (RJ45).
 
 ****
-## Распиновка платы <a name="23"></a>
+## Распиновка платы и подключение питания<a name="23"></a>
 
 ![Распиновка Raspberry](assets/raspberry02.jpg)
 **Распиновка Raspberry**
-
-****
-## Питание <a name="24"></a>
 
 Raspberry Pi Model B+ может быть запитана через microUSB-кабель или через пины питания.
 Номинальное напряжение питания — 5 В. Компьютер потребляет до 800 мА без внешних устройств.
@@ -178,9 +175,9 @@ sudo raspi-config.
 Выберите опцию `Localisation Options`. Далее опцию `Change locale`. И далее выберите локализацию `ru_RU.UTF-8`.
 
 ****
-## Создание загрузочной SD карты :<a name="251"></a> 
+## Создание загрузочной SD карты <a name="251"></a> 
 
-Если Вы решили использовать образ SD карты с операционной системой `Raspbian` c официального сайта Raspbery Pi (`https://www.raspberrypi.org/downloads/raspbian/`) вам необходимо выполнить запись образа, например с помощью команды `dd`:
+Если Вы решили использовать образ SD карты с операционной системой `Raspbian` c официального сайта Raspbery Pi [https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/) вам необходимо выполнить запись образа, например с помощью команды `dd`:
 
 ```sh
 sudo dd bs=4M if=<путь к файлу img> of=/dev/mmcblk0
@@ -188,7 +185,7 @@ sudo dd bs=4M if=<путь к файлу img> of=/dev/mmcblk0
 
 Обратите внимание, что указание неверного блочного устройства (например, /dev/sda вместо /dev/mmcblk0), приведет к удалению всех данных с Вашего компьютера. Убедитесь в безопасности Ваших действий, изучив таблицу дисков по команде `df -h` и `fdisk -l`.
 
-Далее, после прошивки образа на карту, Вам необходимо разрешить использование службы ssh. Для этого скопируйте в корневой каталог раздела №1 SD-карты (устройство /dev/mmcblk0p1, /dev/sdb1 и т.д.), который имеет имя `boot`, файл `http://e-learning.bmstu.ru/moodle/pluginfile.php/6605/mod_resource/content/1/ssh`
+Далее, после прошивки образа на карту, Вам необходимо разрешить использование службы ssh. Для этого скопируйте в корневой каталог раздела №1 SD-карты (устройство /dev/mmcblk0p1, /dev/sdb1 и т.д.), который имеет имя `boot`, файл [ssh](http://e-learning.bmstu.ru/moodle/pluginfile.php/6605/mod_resource/content/1/ssh)
 
 
 ****
@@ -553,7 +550,7 @@ console.log("Server works on port " + port);
 В следующем задании Вам понадобятся компьютер под управление ОС Linux с браузером и сервер (Raspberry Pi).
 На клиентском устройстве необходимо повторить предыдущие шаги установки Node.js  и веб-фреймворка Express, так как на клиенте надо будет иметь сервер со статикой для веб-интерфейса!
 
-Скачать примеры из репозитория на клиентский и серверный узел `https://github.com/alexbmstu/2018.git`
+Скачать примеры из репозитория на клиентский и серверный узел [git репозиторий](https://github.com/alexbmstu/2018.git)
 На Raspberry Pi понадобится папка `server`, на клиенте - `client`
 
 На сервере (Raspberry Pi):
@@ -584,6 +581,93 @@ unzip server.zip
 
 **Задание: поменять url запросов и порты работы серверов таким образом, чтобы запросы можно было пересылать с веб-интерфейса на сервер-обработчик Raspberry Pi**
 
+#IP адреса <a name="99"></a>
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-10-26 14:58 MSK
+Nmap scan report for _gateway (192.168.10.1)
+Host is up (0.00035s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: 5C:D9:98:49:DE:45 (D-Link)
+
+Nmap scan report for 192.168.10.70
+Host is up (0.0010s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: E8:04:62:6E:B3:40 (Cisco Systems)
+
+Nmap scan report for 192.168.10.71
+Host is up (0.0010s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: EC:44:76:BE:0C:C0 (Cisco Systems)
+
+Nmap scan report for 192.168.10.83
+Host is up (0.00067s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: B8:27:EB:40:03:5F (Raspberry Pi Foundation)
+
+Nmap scan report for 192.168.10.85
+Host is up (0.00063s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: B8:27:EB:1C:00:9B (Raspberry Pi Foundation)
+
+Nmap scan report for 192.168.10.86
+Host is up (0.00079s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: E8:04:62:6E:B4:C0 (Cisco Systems)
+
+Nmap scan report for 192.168.10.88
+Host is up (-0.100s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: B8:27:EB:A4:02:5F (Raspberry Pi Foundation)
+
+Nmap scan report for 192.168.10.89
+Host is up (-0.100s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: 02:81:F1:72:D7:9D (Unknown)
+
+Nmap scan report for 192.168.10.90
+Host is up (-0.099s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: 00:E0:4C:68:07:4C (Realtek Semiconductor)
+
+Nmap scan report for 192.168.10.93
+Host is up (-0.100s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: F8:CA:B8:16:D1:14 (Dell)
+
+Nmap scan report for 192.168.10.94
+Host is up (-0.100s latency).
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+MAC Address: B8:27:EB:4B:CA:35 (Raspberry Pi Foundation)
+
+Nmap scan report for alexpopov-ThinkPad-S1-Yoga (192.168.10.59)
+Host is up.
+
+PORT   STATE         SERVICE
+22/tcp open|filtered ssh
+
+Nmap done: 256 IP addresses (18 hosts up) scanned in 4.70 seconds
 ****
 # Дополнительные источники <a name="a001"></a>
 
