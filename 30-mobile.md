@@ -67,17 +67,17 @@
 
 Xcode (версия 10) можно скачать в магазине App Store на компьютере с macOS Mojave :
 
-![](iOS_html_2d196317aa6bb516.png)
+![](assets/iOS_html_2d196317aa6bb516.png)
 
 После установки, IDE отобразится в меню приложений:
 
-![](iOS_html_95debbd82af313ff.png)
+![](assets/iOS_html_95debbd82af313ff.png)
 
 Прежде чем писать приложения под iOS и отправлять их на сервер, необходимо их подготовить и собрать при помощи iPhone.
 
 Любые параметры, связанные со здоровьем в iPhone, как правило передаются в системное приложение Health, которое выглядит так:
 
-![](iOS_html_c06e4f2a185a5031.png)
+![](assets/iOS_html_c06e4f2a185a5031.png)
 
 Подробное описание можно найти на сайте: [https://www.apple.com/ru/ios/health/](https://www.apple.com/ru/ios/health/)
 
@@ -87,52 +87,52 @@ Xcode (версия 10) можно скачать в магазине App Store 
 
 1) Установить приложение
 
-![](iOS_html_b818428146844971.jpg)
+![](assets/iOS_html_b818428146844971.jpg)
 
 2) Зайти в приложение Cardiio
 
-![](iOS_html_582217324c415d5c.jpg)
+![](assets/iOS_html_582217324c415d5c.jpg)
 
 3) Зайти в настройки и проскроллить до секции Apple Health, после чего включить интеграцию с Health
 
-![](iOS_html_a66391c66f8a8299.jpg)
+![](assets/iOS_html_a66391c66f8a8299.jpg)
 
 4) После измерения пульса, данные можно будет увидеть в Health
 
-![](iOS_html_2f275c92138b7eca.jpg)
+![](assets/iOS_html_2f275c92138b7eca.jpg)
 
 Чтобы собирать данные с шагомера и пройденного расстояния не нужно ставить никаких дополнительных приложений, все данные уже находятся в Health:
 
-![](iOS_html_4b6eb75e2df605fe.jpg)
+![](assets/iOS_html_4b6eb75e2df605fe.jpg)
 
 Чтобы собирать данные о питании необходимо проделать следующие шаги:
 
 1) Установить приложение FatSecret
 
-![](iOS_html_61a282a276905974.jpg)
+![](assets/iOS_html_61a282a276905974.jpg)
 
 2) Зайти в настройки приложения и включить интеграцию с Health
 
-![](iOS_html_ebea3cd28a29ae1c.jpg)
+![](assets/iOS_html_ebea3cd28a29ae1c.jpg)
 
 3) Добавить прием пищи в приложение
 
-![](iOS_html_7af205cc846dc391.jpg)
+![](assets/iOS_html_7af205cc846dc391.jpg)
 
 4) После этого вся информации о питании будет доступна в Health
 
-![](iOS_html_6b91a9fa11f1d15f.jpg)
+![](assets/iOS_html_6b91a9fa11f1d15f.jpg)
 
 Для того чтобы собирать данные о медитации и отдыхе необходимо проделать следующие шаги:
 
 1) Установить приложение Relax Melodies
 
-![](iOS_html_3078659d9baa9bab.jpg)
+![](assets/iOS_html_3078659d9baa9bab.jpg)
 
 2) Включить в настройках интеграцию с Health
 
-![](iOS_html_c488a74b92455944.jpg)
+![](assets/iOS_html_c488a74b92455944.jpg)
 
 3) Далее после медитации под какую-нибудь бесплатную мелодию данные о медитации отправятся в Health
 
-![](iOS_html_141b413dd1351942.jpg)
+![](assets/iOS_html_141b413dd1351942.jpg)
