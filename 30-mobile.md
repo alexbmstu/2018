@@ -61,6 +61,168 @@
 ![Приложение Google Fit](assets/GoogleFit.png)
 **Приложение Google Fit**
 
+
+Скачайте тестовый проект MyApplication. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git)
+
+Вам понадобится папка архив в папке `./scr`. Распакуйте архив MyApplication4-2.zip.
+
+Открываем папку с проектом в андройд студии.
+
+![](assets/Android_html_8bcd05d31e182942.png)
+
+Синхронизируем Gradle
+
+![](assets/Android_html_1d748bdfffa9b2c0.png)
+
+Нужна эта иконка
+
+![](assets/Android_html_c98922279a04202f.png)
+
+Далее подключаем телефон шнурок к компу
+
+На телефоне открываем настройки и ищем страницу информации о ОС (о телефоне)
+
+Много раз нажимаем на версию прошивки, пока не увидим сообщение о том что стали разработчиком
+
+![](assets/Android_html_c6fce88d8df6496c.gif)
+
+Далее где-то в настройках у вас появится пункт «Для разработчиков»
+
+![](assets/Android_html_36c8dbf4b65f72cf.gif)
+
+Открываем этот пункт, включаем режим разработчика и включаем все что связано с отладкой по USB
+
+![](assets/Android_html_36a60ff32714ad68.gif) ![](assets/Android_html_9ef7d8303dc304cd.gif)
+
+Далее идем в настройки проекта
+
+![](assets/Android_html_46738d97691ddd88.png)
+
+Устанавливаем минимальную версию SDK не ниже чем версия на вашем телефоне
+
+![](assets/Android_html_b154999772502f4f.png)
+
+Пробуем запустить приложение
+
+![](assets/Android_html_a076265319378453.png)
+
+В окне выбора устройств выбираем свой телефон
+
+![](assets/Android_html_b42aea9b179417a9.png)
+
+Далее необходимо настроить консоль разработчика
+
+Идем на сайт
+
+[https://console.developers.google.com](https://console.developers.google.com/)
+
+В окне выбора проектов создаем новый
+
+![](assets/Android_html_b9419a7dd5c11d8e.png)
+
+Вводим имя проекта и сохраняем
+
+В окне выбора проектов выбираем созданный проект
+
+![](assets/Android_html_208dccb66d9c7037.png)
+
+![](assets/Android_html_561c1afc02a2744e.png)
+
+Жмем включить Api и Сервисы
+
+В поиске вводим Fit и выбираем Fitness Api.
+
+![](assets/Android_html_d835e4401ccaded6.png)
+
+На странице Api жмем включить
+
+Теперь нужно создать учетные данные
+
+![](assets/Android_html_4228554e8cda4eb7.png)
+
+или так
+
+![](assets/Android_html_6cc240583ff1ac57.png)
+
+На странице учетных данных жмем создать
+
+![](assets/Android_html_36f7d18055e40435.png)
+
+Заполняем первую форму
+
+![](assets/Android_html_a4ca26a14681e8f5.png)
+
+Жмем выбор типа учетных данных
+
+Открываем окно Gradle
+
+![](assets/Android_html_f079c6322684ab37.png)
+
+Открываем Signing Report
+
+![](assets/Android_html_f66a3f1cf94e57a1.png)
+
+Дважды кликаем на него
+
+В консоли нам напишет
+
+![](assets/Android_html_f867acd3beeb5659.png)
+
+Нас интересует этот блок
+
+![](assets/Android_html_4c1ae61136bdf6d1.png)
+
+Копируем SHA1 ключ
+
+A7:fvdnvldfvnldfnvkldnvlkdnfvndfklvndlfnvkdfnvlkdnklfnvld
+
+Открываем файл манифеста
+
+![](assets/Android_html_193a41c49336dd86.png)
+
+Ищем название пакета
+
+package="com.example.alexdark.myapplication4"
+
+![](assets/Android_html_5fb18a465ab137a4.png)
+
+Жмем создать идентификатор клиента
+
+Далее заполняем форму
+
+![](assets/Android_html_e1576d155732e85.png)
+
+Скачиваем ClientID
+
+![](assets/Android_html_5e05523ea8ee76c6.png)
+
+Это  строка  вида
+
+чтоТоТамСекретное.apps.googleusercontent.com
+
+Открываем файл констант
+
+![](assets/Android_html_e88f7068271090a.png)
+
+Меняем строчку
+
+`<string name="server_client_id">-- </string>`
+
+Вставляем свой ключ
+
+Теперь еще раз запускаем приложение на устройстве и наслаждаемся его работой.
+
+При запуске ждем когда произойдет подключение к серваку
+
+Когда это произойдет жмем кнопку GetData
+
+https://developers.google.com/android/reference/com/google/android/gms/common/Scopes
+
+https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType
+
+https://developers.google.com/fit/rest/v1/reference/activity-types
+
+
 ## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="33"></a>
 
 Для того, чтобы разрабатывать мобильные приложения для `iOS` необходим компьютер старше 2013 года с операционной системой `maсOS Mojave`. На компьютер необходимо установить IDE для разработки `iOS` приложений – Xcode.
