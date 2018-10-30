@@ -61,6 +61,8 @@
 ![Приложение Google Fit](assets/GoogleFit.png)
 **Приложение Google Fit**
 
+### Сборка и запуск тестового приложения Android <a name="324"></a>
+
 
 Скачайте тестовый проект MyApplication. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git)
 
