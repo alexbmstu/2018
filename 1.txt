@@ -1036,7 +1036,6 @@ Web-консоль управления может исопльзоваться 
 Далее Вам необходимо получить токен для доступа к ICP. Токен валиден только в течении 12 часов, поэтому мы автоматизируем процесс получения токена и валидации доступа. Создайте файл `connectICP.sh` со следующим содержанием:
 
 ```sh
-#!/bin/bash
 CLUSTERNAME=bmstu.ru
 ACCESS_IP=195.19.40.201
 USERNAME=xxxxxxxxx
@@ -1125,7 +1124,6 @@ RUN mkdir /var/run/sshd
 RUN echo 'root:hackathon' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 ENV NOTVISIBLE "in users profile"
@@ -1177,9 +1175,6 @@ Are you sure you want to continue connecting (yes/no)?
 
 ```sh
 docker container stop test_sshd
-docker container rm test_sshd
-# Удалить образ:
-# docker image rm hack_sshd
 ``` 
 
 ## Развертывание docker образа в ICP <a name="442"></a>
