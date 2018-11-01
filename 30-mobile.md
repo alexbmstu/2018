@@ -61,7 +61,7 @@
 ![Приложение Google Fit](assets/GoogleFit.png)
 **Приложение Google Fit**
 
-### Сборка и запуск тестового приложения Android <a name="324"></a>
+## Сборка и запуск тестового приложения Android <a name="33"></a>
 
 
 Скачайте тестовый проект MyApplication. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git)
@@ -225,7 +225,7 @@ https://developers.google.com/android/reference/com/google/android/gms/fitness/d
 https://developers.google.com/fit/rest/v1/reference/activity-types
 
 
-## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="33"></a>
+## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="34"></a>
 
 Для того, чтобы разрабатывать мобильные приложения для `iOS` необходим компьютер старше 2013 года с операционной системой `maсOS Mojave`. На компьютер необходимо установить IDE для разработки `iOS` приложений – Xcode.
 
