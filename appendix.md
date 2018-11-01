@@ -1,7 +1,7 @@
 ****
 # Дополнительные источники <a name="a001"></a>
 
-<a name="pub1">[1]</a> [Учебные материалы по IBM Cloud Private](https://www.ibm.com/cloud/garage/tutorials/ibm-cloud-private-trial/ibm-cloud-private-hosted-trial)
+<a name="pub1">[1]</a> [Учебные материалы по IBM Cloud Private](https://github.com/phthom/IBMCloudPrivate)
 
 <a name="pub1">[2]</a> [Инструкции по развертыванию IBM Cloud Private на виртуальной машине десктопа](https://github.com/IBM/deploy-ibm-cloud-private)
 

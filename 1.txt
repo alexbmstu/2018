@@ -1231,10 +1231,12 @@ team00ubuntu                     LoadBalancer   10.0.0.126   <pending>     22:30
 
 Нам был выделен порт 30646. Теперь мы можем обратиться к нашему контейнеру:
 
-`ssh root@195.19.40.201 -p 30646
+```
+ssh root@195.19.40.201 -p 30646
 The authenticity of host '[195.19.40.201]:30646 ([195.19.40.201]:30646)' can't be established.
 ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
-Are you sure you want to continue connecting (yes/no)? `
+Are you sure you want to continue connecting (yes/no)? 
+```
 
 
 
@@ -1329,7 +1331,7 @@ Nmap done: 256 IP addresses (18 hosts up) scanned in 4.70 seconds
 ****
 # Дополнительные источники <a name="a001"></a>
 
-<a name="pub1">[1]</a> [Учебные материалы по IBM Cloud Private](https://www.ibm.com/cloud/garage/tutorials/ibm-cloud-private-trial/ibm-cloud-private-hosted-trial)
+<a name="pub1">[1]</a> [Учебные материалы по IBM Cloud Private](https://github.com/phthom/IBMCloudPrivate)
 
 <a name="pub1">[2]</a> [Инструкции по развертыванию IBM Cloud Private на виртуальной машине десктопа](https://github.com/IBM/deploy-ibm-cloud-private)
 

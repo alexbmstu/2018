@@ -344,10 +344,12 @@ team00ubuntu                     LoadBalancer   10.0.0.126   <pending>     22:30
 
 Нам был выделен порт 30646. Теперь мы можем обратиться к нашему контейнеру:
 
-`ssh root@195.19.40.201 -p 30646
+```
+ssh root@195.19.40.201 -p 30646
 The authenticity of host '[195.19.40.201]:30646 ([195.19.40.201]:30646)' can't be established.
 ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
-Are you sure you want to continue connecting (yes/no)? `
+Are you sure you want to continue connecting (yes/no)? 
+```
 
 
 
