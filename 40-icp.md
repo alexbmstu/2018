@@ -279,8 +279,8 @@ docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 Зайдите в контейнер по команде:
 
-```ssh 
-root@172.17.0.1 -p 32768
+```
+ssh root@172.17.0.1 -p 32768
 The authenticity of host '[172.17.0.1]:32768 ([172.17.0.1]:32768)' can't be established.
 ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
 Are you sure you want to continue connecting (yes/no)? 
