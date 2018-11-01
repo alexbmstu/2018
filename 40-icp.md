@@ -118,7 +118,7 @@ Web-консоль управления может исопльзоваться 
 
 Далее следуйте инструкциям по установке. 
 
-Для не Linux систем смотрите подробную инструкцию [тут](https://console.bluemix.net/docs/cli/index.html#overview).
+Для non-Linux систем смотрите подробную инструкцию [тут](https://console.bluemix.net/docs/cli/index.html#overview).
 
 Проверьте работу плагина `bx`:
 
@@ -183,7 +183,7 @@ Context "cluster.local-context" modified.
 Switched to context "cluster.local-context".
 ```
 
-Выполните вход на сервре ICP:
+Выполните вход на сервер ICP:
 
 `kubectl version --short`
 
@@ -224,7 +224,7 @@ Login Succeeded
 
 ## Создание docker образа и его развертывание на ICP <a name="44"></a>
 
-В этом разделе мы создадим и настроим docker образ для развертывания в ICP. Далее мы запустим развернутый образ и создадим работающий `Под`. Доступ к поду будет осуществляться по `ssh`.
+В этом разделе мы создадим и настроим docker образ для развертывания в ICP. Далее мы запустим развернутый образ и создадим работающий "под". Доступ к поду будет осуществляться по `ssh`.
 
 ## Создание docker образа <a name="441"></a>
 
@@ -264,10 +264,10 @@ sudo docker port test_sshd 22
 
 `0.0.0.0:49154`
 
-Обратите внимание, что адрес 0.0.0.0 не является адресом контейнера. Вам нужно узнать параметры сети docker по команде `ipconfig`
+Обратите внимание, что адрес `0.0.0.0` не является адресом контейнера. Вам нужно узнать параметры сети docker по команде `ipconfig`
 
 ```
-cker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
         inet6 fe80::42:b8ff:feda:5831  prefixlen 64  scopeid 0x20<link>
         ether 02:42:b8:da:58:31  txqueuelen 0  (Ethernet)
@@ -286,10 +286,10 @@ ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
 Are you sure you want to continue connecting (yes/no)? 
 ```
 
-Выйдите из сессии ssh по команде `exit`. Установите и удалите образ из локального компьютера, т.к. мы будем развертывать его далее тольк в ICP.
+Выйдите из сессии ssh по команде `exit`. Установите и удалите образ из локального компьютера, т.к. мы будем развертывать его далее только в ICP.
 
 ```sh
-docker container stop test_sshd
+sudo docker container stop test_sshd
 ``` 
 
 ## Развертывание docker образа в ICP <a name="442"></a>
@@ -314,13 +314,13 @@ docker container stop test_sshd
 
 `kubectl config current-context`
 
-Если не установлен нужный нам namespace=`ваш логин`, установим его:
+Если не установлен нужный нам `namespace`=`ваш логин`, установим его:
 
 `kubectl config set-context my-context --namespace=team00`
 
 Теперь мы можем развернуть образ на кластере ICP:
 
-`kubectl run team00ubuntu --image=icp.bmstu.ru:8500/default/hack_sshd`
+`kubectl run team00ubuntu --image=icp.bmstu.ru:8500/team00/hack_sshd`
 
 Проверить выполнение команды можно следующим образом:
 
