@@ -363,6 +363,7 @@ Are you sure you want to continue connecting (yes/no)?
 Получим доступ к консоли bash Пода: 
 
 `kubectl exec -it shell-demo -- /bin/bash`
+
 `root@shell-demo:/`
 
 Подробнее о синтаксисе yaml можно прочесть [тут](https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/)
