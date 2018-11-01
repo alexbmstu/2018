@@ -96,7 +96,7 @@
 
 или
 
-* https://ipaddress:8443Lf
+* https://icp.bmstu.ru:8443
 
 ![](assets/loginicp.png)
 
@@ -212,6 +212,7 @@ Switched to context "cluster.local-context".
 `sudo docker login icp.bmstu.ru:8500`
 
 В ответ вы должны получить следующее сообщение:
+
 ```
 Authenticating with existing credentials...
 WARNING! Your password will be stored unencrypted in /home/team00/.docker/config.json.
@@ -278,7 +279,8 @@ cker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 Зайдите в контейнер по команде:
 
-```ssh root@172.17.0.1 -p 32768
+```ssh 
+root@172.17.0.1 -p 32768
 The authenticity of host '[172.17.0.1]:32768 ([172.17.0.1]:32768)' can't be established.
 ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
 Are you sure you want to continue connecting (yes/no)? 
@@ -337,7 +339,7 @@ team00ubuntu-67bfd95cd9-94b65   1/1       Running   0          11s
 ```
 kubectl get svc
 NAME                       TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)        AGE
-ubuntu                     LoadBalancer   10.0.0.126   <pending>     22:30646/TCP   1m
+team00ubuntu                     LoadBalancer   10.0.0.126   <pending>     22:30646/TCP   1m
 ```
 
 Нам был выделен порт 30646. Теперь мы можем обратиться к нашему контейнеру:
@@ -346,5 +348,7 @@ ubuntu                     LoadBalancer   10.0.0.126   <pending>     22:30646/TC
 The authenticity of host '[195.19.40.201]:30646 ([195.19.40.201]:30646)' can't be established.
 ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
 Are you sure you want to continue connecting (yes/no)? `
+
+
 
 Подробнее об испольовании docker в ICP вы можете прочитать [тут](https://github.com/phthom/IBMCloudPrivate/blob/master/2-DockerLab.md)
