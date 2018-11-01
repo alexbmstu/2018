@@ -350,7 +350,20 @@ The authenticity of host '[195.19.40.201]:30646 ([195.19.40.201]:30646)' can't b
 ECDSA key fingerprint is SHA256:S4g5OT66u04YzEY9ck8S0n29HJ728CmeRFVKy0OhBc8.
 Are you sure you want to continue connecting (yes/no)? 
 ```
+Подробнее об использовании docker в ICP вы можете прочитать [тут](https://github.com/phthom/IBMCloudPrivate/blob/master/2-DockerLab.md)
 
+### Запуск Пода с испольщованием yaml конфигуратора <a name="443"></a>
 
+Под можно создать как из обаза, сохраненного локально в ICP, так и с помощью файла конфигурации yaml. В последнем случае можно описать инфраструктуру контейнеров, входящих в один Под. В следующем примере мы создадим контейнер на основе репозиторя Kubernetes, доступного всем пользователям.
 
-Подробнее об испольовании docker в ICP вы можете прочитать [тут](https://github.com/phthom/IBMCloudPrivate/blob/master/2-DockerLab.md)
+Создадим Под nginx:
+
+`kubectl create -f https://k8s.io/examples/application/shell-demo.yaml`
+
+Получим доступ к консоли bash Пода: 
+
+`kubectl exec -it shell-demo -- /bin/bash`
+`root@shell-demo:/`
+
+Подробнее о синтаксисе yaml можно прочесть [тут](https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/)
+
