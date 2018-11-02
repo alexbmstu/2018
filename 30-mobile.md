@@ -64,6 +64,27 @@
 ## Сборка и запуск тестового приложения Android <a name="33"></a>
 
 
+Данные о пульсе можно брать из приложения Accurate Heart Rate Monitor
+
+![](assets/Android_html_14f3eb2f8656de30.png)
+
+После установки приложения заходим в настройки и устанавливаем флаг интеграции с Google Fit
+
+![](assets/Android_html_ea1277131a4ca99b.png)
+
+Далее измеряем пульс. Вскоре эти данные должны появиться в облаке Google.
+
+Для получения данных о сне устанавливаем Runtastic Sleep Better
+
+![](assets/Android_html_5e94403be6fa9409.png)
+
+Интеграция автоматическая
+
+Для получения данных о питании устанавливаем myfitnesspal
+
+![](assets/Android_html_3379c061e26f43b.png)
+
+
 Скачайте тестовый проект MyApplication. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git)
 
 Вам понадобится архив в папке `./scr`. Распакуйте архив MyApplication4-2.zip.
@@ -217,6 +238,52 @@ package="com.example.alexdark.myapplication4"
 При запуске ждем когда произойдет подключение к серваку
 
 Когда это произойдет жмем кнопку GetData
+
+Важный код описан комментариями
+
+  
+Данные которые можно запрашивать из GoogleFit приведены тут
+
+[https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType](https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType)
+
+Чтобы получить доступ к ряду значений необходимо при создании клиента запрашивать дополнительные разрешения
+```
+
+mGoogleApiClient = new GoogleApiClient.Builder(this)
+.addApi(Fitness._HISTORY_API_)
+.addScope(new Scope(Scopes._FITNESS_ACTIVITY_READ_WRITE_))
+.addScope(new Scope(Scopes._FITNESS_BODY_READ_WRITE_))
+.addScope(new Scope(Scopes._FITNESS_NUTRITION_READ_))
+.addConnectionCallbacks(this)
+.enableAutoManage(this, 0, this)
+.build();
+```
+Подробно об этом написано тут
+
+https://developers.google.com/android/reference/com/google/android/gms/common/Scopes
+
+Если вы хотите анализировать активность то расшифровка типов приведена тут
+
+[https://developers.google.com/fit/rest/v1/reference/activity-types](https://developers.google.com/fit/rest/v1/reference/activity-types)
+
+Если вам нужно получать из облака данные которых там нет, можно попробовать записать их туда самим. Google Fit позволяет записывать данные в облако. Тут очевидного ответа а как нет. Можно выделить лишь общий принцип
+
+1.  Создаем дата сорс
+
+2.  Создаем дата сет из сорса
+
+3.  Создаем измерение
+
+4.  Заполняем измерение данными
+
+5.  Кладем измерение в дата сет
+
+6.  Отправляем дата сет
+
+Основные сложности будут с шагом 4\. Каждый дата поинт для разных типов данных имеет свою специфику заполнения. Это вам придется гуглить. В проекте есть пример для создания активити. Это самый простой пример. Желательно конечно, чтобы вы нашли мобильное приложение, которое интегрируется с фитом.
+
+
+
 
 https://developers.google.com/android/reference/com/google/android/gms/common/Scopes
 
