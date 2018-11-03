@@ -296,7 +296,7 @@ sudo docker container stop test_sshd
 
 ## Развертывание docker образа в ICP <a name="442"></a>
 
-Далее подготовим образ к передачи в репозиторий ICP. Укажем имя образа и репозиторий (вам необходимо указать доступный вам namespace вместо `team00`):
+Далее подготовим образ к передаче в репозиторий ICP. Укажем имя образа и репозиторий (вам необходимо указать доступный вам namespace вместо `team00`):
 
 `sudo docker tag hack_sshd icp.bmstu.ru:8500/team00/hack_sshd`
 
@@ -369,4 +369,5 @@ Are you sure you want to continue connecting (yes/no)?
 `root@shell-demo:/`
 
 Подробнее о синтаксисе yaml можно прочесть [тут](https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/)
+Набор готовых конфигурационных файлов можно найти [тут](https://github.com/IBM/charts)
 
