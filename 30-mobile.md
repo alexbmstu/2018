@@ -282,17 +282,75 @@ https://developers.google.com/android/reference/com/google/android/gms/common/Sc
 
 Основные сложности будут с шагом 4\. Каждый дата поинт для разных типов данных имеет свою специфику заполнения. Это вам придется гуглить. В проекте есть пример для создания активити. Это самый простой пример. Желательно конечно, чтобы вы нашли мобильное приложение, которое интегрируется с фитом.
 
+## Получение и обработка данных на nodejs сервере Raspberry Pi  <a name="34"></a>
+
+Для того, чтобы протестировать получение данных вычислительным хабом RaspberryPi, необходимо поменять код приложения сервера nodejs. Для этого добавьте в код `index.js` в папке `./routes` следующий код:
+
+```js 
+
+router.post('/data', function (req, res) {
+    console.log(req);
+    res.send();
+});
+
+router.post('/step', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('steps')
+    console.log(req.body['start'])
+    console.log(req.body['value'])
+
+});
+
+router.post('/pulse', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('pulse')
+    console.log(req.body['start'])
+    console.log(req.body['value'])
+
+});
+
+router.post('/activity', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('activity')
+    console.log(req.body['start'])
+    console.log(req.body['activity'])
+    console.log(req.body['duration'])
+    console.log(req.body['segments'])
+});
+
+router.post('/nutrition', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('nutrition')
+    console.log(req.body['start']);
+    console.log(req.body['mealType']);
+    console.log(req.body['calcium']);
+    console.log(req.body['calories']);
+    console.log(req.body['carbsTotal']);
+    console.log(req.body['cholesterol']);
+    console.log(req.body['dietaryFiber']);
+    console.log(req.body['fatMonounsaturated']);
+    console.log(req.body['fatPolyunsaturated']);
+    console.log(req.body['fatSaturated']);
+    console.log(req.body['fatTotal']);
+    console.log(req.body['fatTrans']);
+    console.log(req.body['iron']);
+    console.log(req.body['potassium']);
+    console.log(req.body['protein']);
+    console.log(req.body['sodium']);
+    console.log(req.body['sugar']);
+    console.log(req.body['vitamin_c']);
+});
+
+```
+
+Проверьте, что в логах запущенного nodejs появляются сообщения с данными от нашего приложения.
 
 
-
-https://developers.google.com/android/reference/com/google/android/gms/common/Scopes
-
-https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType
-
-https://developers.google.com/fit/rest/v1/reference/activity-types
-
-
-## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="34"></a>
+## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="35"></a>
 
 Для того, чтобы разрабатывать мобильные приложения для `iOS` необходим компьютер старше 2013 года с операционной системой `maсOS Mojave`. На компьютер необходимо установить IDE для разработки `iOS` приложений – Xcode.
 
@@ -376,4 +434,24 @@ Xcode (версия 10) можно скачать в магазине App Store 
 Далее вам необходимо открыть файл с разрешением xcworkspace BMSTU.
 
 Загрузите приложение на девайс.
+
+
+
+## Получение и обработка данных на nodejs сервере Raspberry Pi  <a name="351"></a>
+
+Для того, чтобы протестировать получение данных вычислительным хабом RaspberryPi, необходимо поменять код приложения сервера nodejs. Для этого добавьте в код `index.js` в папке `./routes` следующий код:
+
+```js 
+router.post('/data', function (req, res) {
+    res.send();
+    console.log(req.body['parameter']);
+    console.log(req.body['value']);
+});
+```
+
+Проверьте, что в логах запущенного nodejs появляются сообщения с данными от нашего приложения.
+
+
+
+
 
