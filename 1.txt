@@ -649,6 +649,27 @@ unzip server.zip
 ## Сборка и запуск тестового приложения Android <a name="33"></a>
 
 
+Данные о пульсе можно брать из приложения Accurate Heart Rate Monitor
+
+![](assets/Android_html_14f3eb2f8656de30.png)
+
+После установки приложения заходим в настройки и устанавливаем флаг интеграции с Google Fit
+
+![](assets/Android_html_ea1277131a4ca99b.png)
+
+Далее измеряем пульс. Вскоре эти данные должны появиться в облаке Google.
+
+Для получения данных о сне устанавливаем Runtastic Sleep Better
+
+![](assets/Android_html_5e94403be6fa9409.png)
+
+Интеграция автоматическая
+
+Для получения данных о питании устанавливаем myfitnesspal
+
+![](assets/Android_html_3379c061e26f43b.png)
+
+
 Скачайте тестовый проект MyApplication. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git)
 
 Вам понадобится архив в папке `./scr`. Распакуйте архив MyApplication4-2.zip.
@@ -803,14 +824,118 @@ package="com.example.alexdark.myapplication4"
 
 Когда это произойдет жмем кнопку GetData
 
+Важный код описан комментариями
+
+  
+Данные которые можно запрашивать из GoogleFit приведены тут
+
+[https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType](https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType)
+
+Чтобы получить доступ к ряду значений необходимо при создании клиента запрашивать дополнительные разрешения
+```
+
+mGoogleApiClient = new GoogleApiClient.Builder(this)
+.addApi(Fitness._HISTORY_API_)
+.addScope(new Scope(Scopes._FITNESS_ACTIVITY_READ_WRITE_))
+.addScope(new Scope(Scopes._FITNESS_BODY_READ_WRITE_))
+.addScope(new Scope(Scopes._FITNESS_NUTRITION_READ_))
+.addConnectionCallbacks(this)
+.enableAutoManage(this, 0, this)
+.build();
+```
+Подробно об этом написано тут
+
 https://developers.google.com/android/reference/com/google/android/gms/common/Scopes
 
-https://developers.google.com/android/reference/com/google/android/gms/fitness/data/DataType
+Если вы хотите анализировать активность то расшифровка типов приведена тут
 
-https://developers.google.com/fit/rest/v1/reference/activity-types
+[https://developers.google.com/fit/rest/v1/reference/activity-types](https://developers.google.com/fit/rest/v1/reference/activity-types)
+
+Если вам нужно получать из облака данные которых там нет, можно попробовать записать их туда самим. Google Fit позволяет записывать данные в облако. Тут очевидного ответа а как нет. Можно выделить лишь общий принцип
+
+1.  Создаем дата сорс
+
+2.  Создаем дата сет из сорса
+
+3.  Создаем измерение
+
+4.  Заполняем измерение данными
+
+5.  Кладем измерение в дата сет
+
+6.  Отправляем дата сет
+
+Основные сложности будут с шагом 4\. Каждый дата поинт для разных типов данных имеет свою специфику заполнения. Это вам придется гуглить. В проекте есть пример для создания активити. Это самый простой пример. Желательно конечно, чтобы вы нашли мобильное приложение, которое интегрируется с фитом.
+
+## Получение и обработка данных на nodejs сервере Raspberry Pi  <a name="34"></a>
+
+Для того, чтобы протестировать получение данных вычислительным хабом RaspberryPi, необходимо поменять код приложения сервера nodejs. Для этого добавьте в код `index.js` в папке `./routes` следующий код:
+
+```js 
+
+router.post('/data', function (req, res) {
+    console.log(req);
+    res.send();
+});
+
+router.post('/step', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('steps')
+    console.log(req.body['start'])
+    console.log(req.body['value'])
+
+});
+
+router.post('/pulse', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('pulse')
+    console.log(req.body['start'])
+    console.log(req.body['value'])
+
+});
+
+router.post('/activity', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('activity')
+    console.log(req.body['start'])
+    console.log(req.body['activity'])
+    console.log(req.body['duration'])
+    console.log(req.body['segments'])
+});
+
+router.post('/nutrition', function (req, res) {
+    res.send();
+    console.log('********')
+    console.log('nutrition')
+    console.log(req.body['start']);
+    console.log(req.body['mealType']);
+    console.log(req.body['calcium']);
+    console.log(req.body['calories']);
+    console.log(req.body['carbsTotal']);
+    console.log(req.body['cholesterol']);
+    console.log(req.body['dietaryFiber']);
+    console.log(req.body['fatMonounsaturated']);
+    console.log(req.body['fatPolyunsaturated']);
+    console.log(req.body['fatSaturated']);
+    console.log(req.body['fatTotal']);
+    console.log(req.body['fatTrans']);
+    console.log(req.body['iron']);
+    console.log(req.body['potassium']);
+    console.log(req.body['protein']);
+    console.log(req.body['sodium']);
+    console.log(req.body['sugar']);
+    console.log(req.body['vitamin_c']);
+});
+
+```
+
+Проверьте, что в логах запущенного nodejs появляются сообщения с данными от нашего приложения.
 
 
-## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="34"></a>
+## Установка программного обеспечения для разработки мобильных приложений на iOS <a name="35"></a>
 
 Для того, чтобы разрабатывать мобильные приложения для `iOS` необходим компьютер старше 2013 года с операционной системой `maсOS Mojave`. На компьютер необходимо установить IDE для разработки `iOS` приложений – Xcode.
 
@@ -885,6 +1010,36 @@ Xcode (версия 10) можно скачать в магазине App Store 
 3) Далее после медитации под какую-нибудь бесплатную мелодию данные о медитации отправятся в `Health`
 
 ![](assets/iOS_html_141b413dd1351942.jpg)
+
+
+Скачайте тестовый проект BMSTU2018. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git)
+
+Вам понадобится архив в папке `./scr`. Распакуйте архив BMSTU2018.zip.
+
+Далее вам необходимо открыть файл с разрешением xcworkspace BMSTU.
+
+Загрузите приложение на девайс.
+
+
+
+## Получение и обработка данных на nodejs сервере Raspberry Pi  <a name="351"></a>
+
+Для того, чтобы протестировать получение данных вычислительным хабом RaspberryPi, необходимо поменять код приложения сервера nodejs. Для этого добавьте в код `index.js` в папке `./routes` следующий код:
+
+```js 
+router.post('/data', function (req, res) {
+    res.send();
+    console.log(req.body['parameter']);
+    console.log(req.body['value']);
+});
+```
+
+Проверьте, что в логах запущенного nodejs появляются сообщения с данными от нашего приложения.
+
+
+
+
+
 ****
 # День 3 <a name="day3"></a>
 
@@ -901,7 +1056,9 @@ Xcode (версия 10) можно скачать в магазине App Store 
 ### Архитектура IBM Cloud Private <a name="412"></a>
 
 Основными элементами **ICP** являются:
+
 * Система управления Linux-контейнерами **Docker** - программное обеспечение для автоматизации развёртывания и управления приложениями в среде виртуализации на уровне операционной системы. Позволяет «упаковать» приложение со всем его окружением и зависимостями в контейнер, который может быть перенесён на любую Linux-систему с поддержкой cgroups в ядре, а также предоставляет среду по управлению контейнерами.
+
 * Система оркестрации Linux-контейнеров **Kubernetes** -  открытое программное обеспечение для автоматизации развёртывания, масштабирования и управления контейнеризированными приложениями. Поддерживает основные технологии контейнеризации, включая Docker, rkt, также возможна поддержка технологий аппаратной виртуализации. 
 
 ![Architecture](assets/ICP_architecture.png)
@@ -1094,7 +1251,7 @@ Switched to context "cluster.local-context".
 
 `sudo service docker restart`
 
-Войдите в свой личный реестр изображений.
+Войдите в свой личный реестр образов.
 
 `sudo docker login icp.bmstu.ru:8500`
 
@@ -1181,7 +1338,7 @@ sudo docker container stop test_sshd
 
 ## Развертывание docker образа в ICP <a name="442"></a>
 
-Далее подготовим образ к передачи в репозиторий ICP. Укажем имя образа и репозиторий (вам необходимо указать доступный вам namespace вместо `team00`):
+Далее подготовим образ к передаче в репозиторий ICP. Укажем имя образа и репозиторий (вам необходимо указать доступный вам namespace вместо `team00`):
 
 `sudo docker tag hack_sshd icp.bmstu.ru:8500/team00/hack_sshd`
 
@@ -1254,6 +1411,7 @@ Are you sure you want to continue connecting (yes/no)?
 `root@shell-demo:/`
 
 Подробнее о синтаксисе yaml можно прочесть [тут](https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/)
+Набор готовых конфигурационных файлов можно найти [тут](https://github.com/IBM/charts)
 
 #IP адреса <a name="99"></a>
 
