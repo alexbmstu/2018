@@ -334,7 +334,7 @@ team00ubuntu-67bfd95cd9-94b65   1/1       Running   0          11s
 
 Далее необходимо разрешить форвардинг портов к нашему Поду. Для этого используем команду `expose`:
 
-`kubectl expose deployment team00ubuntu --name=management --type=LoadBalancer --port=22 --target-port=22`
+`kubectl expose deployment team00ubuntu --name=team00_ssh --type=LoadBalancer --port=22 --target-port=22`
 
 Осталось узнать порт, который использовал Kubernetes для форвардинга в порт 22 нашего Пода:
 
