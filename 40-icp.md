@@ -341,7 +341,7 @@ team00ubuntu-67bfd95cd9-94b65   1/1       Running   0          11s
 ```
 kubectl get svc
 NAME                       TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)        AGE
-team00ubuntu                     LoadBalancer   10.0.0.126   <pending>     22:30646/TCP   1m
+team00_ssh                     LoadBalancer   10.0.0.126   <pending>     22:30646/TCP   1m
 ```
 
 Нам был выделен порт 30646. Теперь мы можем обратиться к нашему контейнеру:
