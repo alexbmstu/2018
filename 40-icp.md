@@ -356,6 +356,7 @@ Are you sure you want to continue connecting (yes/no)?
 
 Подробнее о развертывании и конфигурировании сервисов Kubernetes вы можете прочитать [тут](https://kubernetes.io/docs/concepts/services-networking/service/#multi-port-services)
 
+
 ## Запуск Пода с использованием yaml конфигурации <a name="443"></a>
 
 Под можно создать как из обаза, сохраненного локально в ICP, так и с помощью файла конфигурации yaml. В последнем случае можно описать инфраструктуру контейнеров, входящих в один Под. В следующем примере мы создадим контейнер на основе репозиторя Kubernetes, доступного всем пользователям.
@@ -371,5 +372,6 @@ Are you sure you want to continue connecting (yes/no)?
 `root@shell-demo:/`
 
 Подробнее о синтаксисе yaml можно прочесть [тут](https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/)
+
 Набор готовых конфигурационных файлов можно найти [тут](https://github.com/IBM/charts)
 
