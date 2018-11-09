@@ -143,7 +143,7 @@ CMD service postgresql start && forever start index.js && /usr/sbin/sshd -D
 
 
 Далее необходимо разрешить форвардинг портов к нашему Поду. Для
-этого используем команду expose. Обратите внимание, нужно явно указывать уникальные имена портов:
+этого используем команду expose. Обратите внимание, нужно явно указывать уникальные имена сетевых сервисов:
 
 ```
 $ kubectl expose deployment team00nodeapi --name=ssh00nodeapi --
