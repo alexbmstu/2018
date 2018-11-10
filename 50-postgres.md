@@ -139,18 +139,27 @@ CMD service postgresql start && forever start index.js && /usr/sbin/sshd -D
 Замените `XXXXXX` на пароль суперпользователя postgres. 
 
 
-Собираем и запускаем контейнер на сервере. 
+Скачайте тестовый проект ICP_nptest. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git) с помощью команды wget.
 
+Вам понадобится архив в папке `./scr`. 
+
+Создайте в папке с Вашим Docker файлом папку app:
+
+`mkdir app`
+
+Распакуйте архив ICP_nptest.zip в папку `app`. Ознакомьтесь с кодом приложения Node.js.
+
+
+Далее соберите и запускаем контейнер на сервере (см инструкции к День 3). 
 
 Далее необходимо разрешить форвардинг портов к нашему Поду. Для
 этого используем команду expose. Обратите внимание, нужно явно указывать уникальные имена сетевых сервисов:
 
 ```
-$ kubectl expose deployment team00nodeapi --name=ssh00nodeapi --
-type=LoadBalancer --port=22 —target-port=22
+$ kubectl expose deployment team00nodeapi --name=ssh00nodeapi --type=LoadBalancer --port=22 —target-port=22
 service "ssh00nodeapi" exposed
-$ kubectl expose deployment team00nodeapi --name=http00nodeapi --
-type=LoadBalancer --port=80 —target-port=80
+
+$ kubectl expose deployment team00nodeapi --name=http00nodeapi --type=LoadBalancer --port=80 —target-port=80
 service "http00nodeapi" exposed
 ```
 
@@ -242,10 +251,6 @@ postgres@b639e9351a69:~$ exit
 
 ## Тестирование Node.js сервера <a name="52"></a>
 
-
-Скачайте тестовый проект ICP_nptest. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git) с помощью команды wget.
-
-Вам понадобится архив в папке `./scr`. Распакуйте архив ICP_nptest.zip. Ознакомьтесь с кодом и запустите приложение Node.js.
 
 Тест приложения пожно выполнить с помощью браузерного плагина `Postman` (подробнее об установке `Postman` можно прочитать [тут](https://www.getpostman.com/docs/v6/postman/launching_postman/installation_and_updates)).
 
