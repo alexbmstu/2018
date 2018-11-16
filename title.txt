@@ -7,7 +7,7 @@
 
 |   <img src="assets/aleksei_popov.png" width="150"> |  <img src="assets/bader_rasheed.png" width="150">  |
 |: --------------------------------------- :|: --------------------------------------- :|
-| Алексей Юрьевич Попов <br> *к.т.н., доцент МГТУ им. Н.Э.Баумана* <br> alexpopov@bmstu.ru | *Бадер Рашид* <br> *магистр, МГТУ им. Н.Э.Баумана* <br> brasheedengineer@gmail.com |
+| Алексей Юрьевич Попов <br> *к.т.н., доцент МГТУ им. Н.Э.Баумана* <br> [alexpopov@bmstu.ru](alexpopov@bmstu.ru) | *Бадер Рашид* <br> *магистр, МГТУ им. Н.Э.Баумана* <br> [brasheedengineer@gmail.com](brasheedengineer@gmail.com) |
 
 ---
 	
