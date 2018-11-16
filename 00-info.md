@@ -1,7 +1,13 @@
 # Cтуденческий конкурс (хакатон) МГТУ им. Н.Э.Баумана и Первого МГМУ им. И.М.Сеченова по быстрому прототипированию решений Интернета вещей на основе IBM Cloud Private и IBM Hyperledger Fabric
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 	
-<img src="assets/aleksei_popov.png" width="100"> Алексей Юрьевич Попов, к.т.н., доцент МГТУ им. Н.Э.Баумана <img src="assets/bader_rasheed.png" width="100"> Бадер Рашид, магистр, МГТУ им. Н.Э.Баумана
+<img src="assets/aleksei_popov.png" width="100"> Алексей Юрьевич Попов, к.т.н., доцент МГТУ им. Н.Э.Баумана 
+<img src="assets/bader_rasheed.png" width="100"> Бадер Рашид, магистр, МГТУ им. Н.Э.Баумана
 
 
 # Аннотация <a name="0"></a>
