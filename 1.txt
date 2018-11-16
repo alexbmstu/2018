@@ -1313,7 +1313,7 @@ sudo docker port test_sshd 22
 
 `0.0.0.0:49154`
 
-Обратите внимание, что адрес `0.0.0.0` не является адресом контейнера. Вам нужно узнать параметры сети docker по команде `ipconfig`
+Обратите внимание, что адрес `0.0.0.0` не является адресом контейнера. Вам нужно узнать параметры сети docker по команде `ifconfig`
 
 ```
 docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -1443,9 +1443,22 @@ Are you sure you want to continue connecting (yes/no)?
 
 `sudo apt-get install postgresql`
 
-Запускаем СУБД:
+Запускаем СУБД (если Вы используете пользователя root, то команду sudo использовать не нужно):
 
 `sudo -u postgres psql`
+
+Обратите внимание, что при установке `PostgreSQL` создается пользователь `postgres`, не имеющий домашней директории. Поэтому запись логов и файлов блокировки процессов будет невозможна:
+
+```
+~ $ sudo -u postgres psql
+[sudo] password for user: 
+could not change directory to "/home/user"
+psql: could not connect to server: No such file or directory
+Is the server running locally and accepting
+connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+```
+Поэтому перед запуском команды следует перейти в `/tmp`, доступ на запись в которую для пользователя `postgres` разрешен.
+
 
 Создаём базу данных:
 
@@ -1500,7 +1513,7 @@ Are you sure you want to continue connecting (yes/no)?
 Более подробную информацию по работе с PostgreSQL вы можете найти [тут](https://maxim218.gitbooks.io/postgresql/content/)
  
 
-### Развертывание СУБД PostgreSQL и Node.js сервера в IBM Cloud Private <a name="512"></a>
+### Развертывание СУБД PostgreSQL и Node.js сервера в одном контейнере <a name="512"></a>
 
 Развернем новый контейнер в `ICP`, в котором установим СУБД PostgreSQL и Node.js сервер. Для этого будем использовать следующий `Docker` файл:
 
@@ -1563,18 +1576,27 @@ CMD service postgresql start && forever start index.js && /usr/sbin/sshd -D
 Замените `XXXXXX` на пароль суперпользователя postgres. 
 
 
-Собираем и запускаем контейнер на сервере. 
+Скачайте тестовый проект ICP_nptest. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git) с помощью команды wget.
 
+Вам понадобится архив в папке `./scr`. 
+
+Создайте в папке с Вашим Docker файлом папку app:
+
+`mkdir app`
+
+Распакуйте архив ICP_nptest.zip в папку `app`. Ознакомьтесь с кодом приложения Node.js. Укажите пароль пользователя `postgres` в файле `index.js`.
+
+
+Далее соберите и запускаем контейнер на сервере (см инструкции к День 3). 
 
 Далее необходимо разрешить форвардинг портов к нашему Поду. Для
 этого используем команду expose. Обратите внимание, нужно явно указывать уникальные имена сетевых сервисов:
 
 ```
-$ kubectl expose deployment team00nodeapi --name=ssh00nodeapi --
-type=LoadBalancer --port=22 —target-port=22
+$ kubectl expose deployment team00nodeapi --name=ssh00nodeapi --type=LoadBalancer --port=22 —target-port=22
 service "ssh00nodeapi" exposed
-$ kubectl expose deployment team00nodeapi --name=http00nodeapi --
-type=LoadBalancer --port=80 —target-port=80
+
+$ kubectl expose deployment team00nodeapi --name=http00nodeapi --type=LoadBalancer --port=80 —target-port=80
 service "http00nodeapi" exposed
 ```
 
@@ -1667,10 +1689,6 @@ postgres@b639e9351a69:~$ exit
 ## Тестирование Node.js сервера <a name="52"></a>
 
 
-Скачайте тестовый проект ICP_nptest. Для этого скачайте [git репозиторий](https://github.com/alexbmstu/2018.git) с помощью команды wget.
-
-Вам понадобится архив в папке `./scr`. Распакуйте архив ICP_nptest.zip. Ознакомьтесь с кодом и запустите приложение Node.js.
-
 Тест приложения пожно выполнить с помощью браузерного плагина `Postman` (подробнее об установке `Postman` можно прочитать [тут](https://www.getpostman.com/docs/v6/postman/launching_postman/installation_and_updates)).
 
 
@@ -1711,9 +1729,19 @@ postgres@b639e9351a69:~$ exit
 
 Далее Вы можете проверить появление записей в таблицах базы данных `PostgreSQL` при выполнении запросов POST и их выдачу в ответ на запросы GET.
 
-**Задание: модифицируйте код приложения таким образом, чтобы оно принимало ваш формат json пакетов от мобильного приложения.**
 
-**Обратите внимание, что docker контейнер PostgreSQL использует временное дисковое пространство для размежения файлов БД. Поэтому при удалении или сбое в работе контейнера данные будут потеряны. Чтобы избежать этого, необходимо предоставить контейнеру PostgreSQL доступ к долговременному хранилищу. Более подробно информацию о выделении хранилища в ICP можно найти [тут](https://www.ibm.com/support/knowledgecenter/SS4GSP_6.2.7/com.ibm.udeploy.install.doc/topics/docker_pVolumes.html)**
+**Задание 1: Разделите Docker файл на два таким образом, чтобы:**
+
+**- СУБД PostgreSQL работала в одном контейнере и была доступна по ssh протоколу извне.**
+
+**- Фронтенд Node.js работал в другом контейнере и был доступен по ssh и по http.**
+
+**- Контейнеры взаимодействовали между собой через внутреннюю виртуальную сеть Kubernetes (для этого потребуется настройка приложения Node.js на соединение с контейнером PostgreSQL).**
+
+
+**Задание 2: модифицируйте код приложения таким образом, чтобы оно принимало формат json пакетов от вашего мобильного приложения.**
+
+*Обратите внимание, что docker контейнер PostgreSQL использует временное дисковое пространство для размежения файлов БД. Поэтому при удалении или сбое в работе контейнера данные будут потеряны. Чтобы избежать этого, необходимо предоставить контейнеру PostgreSQL доступ к долговременному хранилищу. Более подробно информацию о выделении хранилища в ICP можно найти [тут](https://www.ibm.com/support/knowledgecenter/SS4GSP_6.2.7/com.ibm.udeploy.install.doc/topics/docker_pVolumes.html)*
  
 
 #IP адреса <a name="99"></a>
