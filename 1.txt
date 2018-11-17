@@ -1445,6 +1445,10 @@ Are you sure you want to continue connecting (yes/no)?
 
 Запускаем СУБД (если Вы используете пользователя root, то команду sudo использовать не нужно):
 
+`sudo /etc/init.d/postgresql start`
+
+Входим в консоль управления `PostgreSQL`:
+
 `sudo -u postgres psql`
 
 Обратите внимание, что при установке `PostgreSQL` создается пользователь `postgres`, не имеющий домашней директории. Поэтому запись логов и файлов блокировки процессов будет невозможна:
