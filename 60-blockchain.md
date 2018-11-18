@@ -325,5 +325,7 @@ blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
 
 * [Пример Fabric nodejs](https://github.com/hyperledger/fabric-samples/blob/release/fabcar/query.js)
 
-* [Кубернес](https://kubernetes.io/docs/concepts/)
+* [Kubernetes](https://kubernetes.io/docs/concepts/)
+
+* [Управление кластером Kubernetes в IBM Cloud](https://console.bluemix.net/docs/containers/cs_clusters.html#planning_clusters)
 
