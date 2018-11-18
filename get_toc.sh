@@ -5,7 +5,7 @@ cat 20*.md >> 1.txt
 cat 30*.md >> 1.txt
 cat 40*.md >> 1.txt
 cat 50*.md >> 1.txt
-#cat 60*.md >> 1.txt
+cat 60*.md >> 1.txt
 #cat 70*.md >> 1.txt
 #cat 80*.md >> 1.txt
 cat 9*.md >> 1.txt
