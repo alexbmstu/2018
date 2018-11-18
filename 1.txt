@@ -1862,7 +1862,7 @@ DevOps Services включает встроенные средства упра�
 
 * Использовать [Blockchain как услугу](https://console.bluemix.net/catalog/services/blockchain), размещенную в [IBM Cloud](https://console.bluemix.net/). `IBM Cloud` предоставляет доступ к HLF Blockchain как услугу для пользователей Starter и Enterprise Membership Plan (студенческий и преподавательский доступ МГТУ).
 
-* Использовать сеть Hyperledger Fabric под управлением [Kubernetes]((https://console.bluemix.net/containers-kubernetes/catalog/cluster)), разворачиваемый через [службу IBM Cloud Container](https://console.bluemix.net/containers- kubernetes/catalog/cluster)
+* Использовать сеть Hyperledger Fabric под управлением [Kubernetes](https://console.bluemix.net/containers-kubernetes/catalog/cluster), разворачиваемый через [службу IBM Cloud Container](https://console.bluemix.net/containers-kubernetes/catalog/cluster)
 
 В этом примере мы будем использовать третий вариант: развернем и настроим сеть нодов  `Hyperledger Fabric` с использованием Kubernetes кластера в IBM Cloud Container Service.
 
