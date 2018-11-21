@@ -317,7 +317,10 @@ blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
   channel.addOrderer(order);
   ```
 
+
 ## Полезные ссылки к дню 5 <a name="618"></a>
+
+* [Примеры и учебные материалы по Hyperledger Fabric](https://github.com/CATechnologies/blockchain-tutorials)
 
 * [Hyperledger Fabric](https://hyperledger-fabric.readthedocs.io/en/release-1.1/)
 
