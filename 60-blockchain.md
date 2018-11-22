@@ -136,14 +136,13 @@ DevOps Services включает встроенные средства упра�
 
   ![](assets/architecture.png)
 
-После регистрации в IBM Cloud вы получите доступ в графический интерфейс управления вашей инфраструктурой. Далее необходимо в левом верхнем углу нажать на кнопку меню и выбрать `Containers`.
+После регистрации в IBM Cloud вы получите доступ в графический интерфейс управления вашей инфраструктурой. Далее необходимо в левом верхнем углу нажать на кнопку меню и выбрать `Containers`. Нам понадобится развернуть новый `Kubernetes Service`. Выбрав слева в меню пункт `Cluster`, вы увидите интерфейс создания кластера kubernetes и выбор региона, в котором кластер будет развернут. Вы можете создать бесплатный кластер в каждом регионе.
+
+После нажатия кнопки `Create` следует выбрать тип кластера `Free` (_free cluster_) и придумать ему название. Создание кластера займет некоторое время.
 
 Войдите в `IBM Cloud CLI` и выполните инициализацию плагина `IBM Cloud Container Service`.
 
-Выбрав слева в меню пункт Cluster, вы увидите интерфейс создания кластера kubernetes и выбор региона, в котором кластер будет развернут. Вы можете создать бесплатный кластер в каждом регионе.
-После нажатия кнопки Create cluster следует выбрать тип кластера `Free` (_free cluster_) и придумать ему название. Создание кластера займет некоторое время.
-
-Далее установить плагин для bx для работы с kubernetes в IBM Cloud:
+Для этого установите плагин для bx для работы с kubernetes в IBM Cloud:
 
 `bx plugin install container-service -r Bluemix`
 
@@ -159,7 +158,7 @@ DevOps Services включает встроенные средства упра�
 
 `bx cs cluster-config mycluster`
 
-Далее выполните команду, которую вы увидите в результате выполнения предыдущего шага. Она укажет утилите kubectl, где находятся ключи доступа к вашему кластеру (путь к конфигурационному файлу может меняться):
+Далее выполните команду, которую вы увидите в результате выполнения предыдущего шага. Она укажет утилите `kubectl`, где находятся ключи доступа к вашему кластеру (путь к конфигурационному файлу может меняться):
 
 `export KUBECONFIG=/path/mycluster/kube-config-mil01-mycluster.yml`
 
@@ -173,6 +172,11 @@ DevOps Services включает встроенные средства упра�
 kubectl version  --short
 Client Version: v1.9.2
 Server Version: v1.8.6-4+9c2a4c1ed1ee7e
+
+kubectl get pods
+NAME                          READY     STATUS    RESTARTS   AGE
+mycluster-54958d8d9-t5gc2     1/1       Running   0          40d
+
 ```
 
 Теперь вы готовы к тому, чтобы начать использовать ваш `kubernetes`-кластер для любых целей. Кластер является бесплатным, в его функционале есть некоторые ограничения, которые нам не помешают развернуть свою блокчейн-сеть
@@ -252,17 +256,75 @@ blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
 
 В исходном проекте был создан Chaincode со значениями `{a: 100, b: 200}`.  Выдадим запрос у узла `org1peer1` о текущем зачении ключа `a`, чтобы убедиться, что цепочный код был правильно создан.
 
-  ![](assets/first-query.png)
+
+```sh
+root@blockchain-org1peer1-7d95cbfd64-ttmq2:/# peer chaincode query -C channel1 -n cc -c '{"Args":["query","a"]}'
+2018-11-22 18:37:56.156 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-11-22 18:37:56.156 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-11-22 18:37:56.156 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-11-22 18:37:56.156 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-11-22 18:37:56.156 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-11-22 18:37:56.157 UTC [msp/identity] Sign -> DEBU 006 Sign: plaintext: 0AA3070A6308031A0B0884EFDBDF0510...120263631A0A0A0571756572790A0161 
+2018-11-22 18:37:56.157 UTC [msp/identity] Sign -> DEBU 007 Sign: digest: 6B6CE906AE6133412FAD14FBC53533DD26B82EF44605243464334AD98B5F8C32 
+Query Result: 100
+2018-11-22 18:37:56.178 UTC [main] main -> INFO 008 Exiting.....
+
+```
+
 
 Теперь отправим запрос к `org2peer1`, чтобы переместить 20 единиц из ` a` в `b`. Будет создана новая транзакция, и после успешного завершения транзакции состояние будет обновлено.
 
-  ![](assets/invoke.png)
 
-Давайте подтвердим, что наш предыдущий вызов выполнен правильно. Мы инициализировали ключ `a` со значением 100 и просто удалили 20 с помощью нашего предыдущего вызова. Поэтому ключ `a` должен показывать 80, ключ ` b` должен показывать 220. Теперь выпустите запроса на `org3peer1` и` org4peer1`, как показано.
+```sh
+root@blockchain-org1peer1-7d95cbfd64-ttmq2:/# peer chaincode invoke -o blockchain-orderer:31010 -C channel1 -n cc -c '{"Args":["invoke","a","b","20"]}'
+2018-11-22 18:41:36.711 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-11-22 18:41:36.711 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-11-22 18:41:36.713 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-11-22 18:41:36.713 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-11-22 18:41:36.714 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-11-22 18:41:36.715 UTC [msp/identity] Sign -> DEBU 006 Sign: plaintext: 0AA4070A6408031A0C08E0F0DBDF0510...696E766F6B650A01610A01620A023230 
+2018-11-22 18:41:36.715 UTC [msp/identity] Sign -> DEBU 007 Sign: digest: 4BCF82ACFD37554A86B19A3C1147BA3E473EF8CD6B1D2A1D5A1335DA4D51DD4D 
+2018-11-22 18:41:36.735 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0AA4070A6408031A0C08E0F0DBDF0510...DABE53824161E5265121E39183CCABED 
+2018-11-22 18:41:36.735 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: BFE329AFC2830609FAC722E0AC9230E73495B3360C85F830427F1BB7FC12483C 
+2018-11-22 18:41:36.741 UTC [chaincodeCmd] chaincodeInvokeOrQuery -> DEBU 00a ESCC invoke result: version:1 response:<status:200 message:"OK" > payload:"\n c*\203\322\"k\351\336\240\215\260\353\347\n\252\t\3319'v\240\365\355\313J\362f>\3540f\300\022S\nA\022+\n\002cc\022%\n\007\n\001a\022\002\010\001\n\007\n\001b\022\002\010\001\032\007\n\001a\032\00280\032\010\n\001b\032\003220\022\022\n\004lscc\022\n\n\010\n\002cc\022\002\010\001\032\003\010\310\001\"\t\022\002cc\032\0031.0" endorsement:<endorser:"\n\007Org1MSP\022\222\006-----BEGIN CERTIFICATE-----\nMIICGDCCAb+gAwIBAgIQKtNDOa1IlNQX9GocXWPpTjAKBggqhkjOPQQDAjBzMQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEcMBoGA1UEAxMTY2Eu\nb3JnMS5leGFtcGxlLmNvbTAeFw0xODExMjIxODI3MTdaFw0yODExMTkxODI3MTda\nMFsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1T\nYW4gRnJhbmNpc2NvMR8wHQYDVQQDExZwZWVyMC5vcmcxLmV4YW1wbGUuY29tMFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE34RrdhgwrExCzne7t2Q/gPgQ21m+c5G+\naCCuBGfDceVS+mol+PC39FePtMP3c0iDVDhwPI9UGTTeM316C0lpg6NNMEswDgYD\nVR0PAQH/BAQDAgeAMAwGA1UdEwEB/wQCMAAwKwYDVR0jBCQwIoAggca8Yy4TN3A+\nGWL+fxflCScOOh5+PfHHqjY0wWuDanYwCgYIKoZIzj0EAwIDRwAwRAIgUN6Z8R5b\nrELp0gFyzeSoxWW1StUttju8v4m+XOLxCI4CIB5/b8cm+gU5ouvPs1iza6H7F35D\nHO9ZpVREzqu7H/lz\n-----END CERTIFICATE-----\n" signature:"0D\002 D\003\t:\013DX\243Pu<f4\244<\363\034\035\333{\224'\350\376\327\350W\351L\343\017\257\002 rv\024H\312\250\t\236F\363\365%PS\231\355\332\276S\202Aa\345&Q!\343\221\203\314\253\355" > 
+2018-11-22 18:41:36.741 UTC [chaincodeCmd] chaincodeInvokeOrQuery -> INFO 00b Chaincode invoke successful. result: status:200 
+2018-11-22 18:41:36.742 UTC [main] main -> INFO 00c Exiting.....
+```
 
-  ![](assets/second-query.png)
+Давайте подтвердим, что наш предыдущий вызов выполнен правильно. Мы инициализировали ключ `a` со значением 100 и просто удалили 20 с помощью нашего предыдущего вызова. Поэтому ключ `a` должен показывать 80, ключ ` b` должен показывать 220. 
 
-  ![](assets/third-query.png)
+```sh
+root@blockchain-org1peer1-7d95cbfd64-ttmq2:/# peer chaincode query -C channel1 -n cc -c '{"Args":["query","a"]}'
+2018-11-22 18:41:52.035 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-11-22 18:41:52.035 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-11-22 18:41:52.035 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-11-22 18:41:52.035 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-11-22 18:41:52.035 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-11-22 18:41:52.036 UTC [msp/identity] Sign -> DEBU 006 Sign: plaintext: 0AA3070A6308031A0B08F0F0DBDF0510...120263631A0A0A0571756572790A0161 
+2018-11-22 18:41:52.036 UTC [msp/identity] Sign -> DEBU 007 Sign: digest: B7968F08A80E4F09FCB7E714A5741386C9206AB896103A0E883F2B6030B38EA2 
+Query Result: 80
+2018-11-22 18:41:52.053 UTC [main] main -> INFO 008 Exiting.....
+```
+
+и
+
+```sh
+root@blockchain-org1peer1-7d95cbfd64-ttmq2:/# peer chaincode query -C channel1 -n cc -c '{"Args":["query","b"]}'
+2018-11-22 18:45:11.948 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-11-22 18:45:11.948 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-11-22 18:45:11.949 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-11-22 18:45:11.949 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-11-22 18:45:11.950 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-11-22 18:45:11.951 UTC [msp/identity] Sign -> DEBU 006 Sign: plaintext: 0AA4070A6408031A0C08B7F2DBDF0510...120263631A0A0A0571756572790A0162 
+2018-11-22 18:45:11.951 UTC [msp/identity] Sign -> DEBU 007 Sign: digest: AA2A7E3E751EA702819BA4386FF82E602783B359BE9F152EA799FDC9634026D5 
+Query Result: 220
+2018-11-22 18:45:11.963 UTC [main] main -> INFO 008 Exiting.....
+
+```
+
+
+Теперь выпустите запроса на `org3peer1` и` org4peer1` и проверьте идентичность ключей.
+
 
 ## Просмотр панели Kubernetes <a name="616"></a>
 
