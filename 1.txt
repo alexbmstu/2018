@@ -1743,6 +1743,62 @@ postgres@b639e9351a69:~$ exit
 **- Контейнеры взаимодействовали между собой через внутреннюю виртуальную сеть Kubernetes (для этого потребуется настройка приложения Node.js на соединение с контейнером PostgreSQL).**
 
 
+Для выполнения задания Вам понадобится создать локальный сетевой сервис типа `ClusterIP` для доступа к `Postgres` 
+
+```
+kubectl expose deployment team99db --name=team99-db-postgres --target-port=5432 --port=5432
+```
+
+Проверить выполнение предыдущей команды можно с помощью команды:
+
+```
+kubectl get svc, в качестве адреса для сервера берём CLUSTER-IP
+```
+
+После этого, код подключения к БД от сервера будет выглядеть следующим образом:
+
+```
+   // Описываем функцию создания нового клиента для подключения к БД
+   function createNewClient() {
+        return new pg.Client({
+            user: 'postgres',
+            host: '<CLusterIP>', // Внутренний IP ноды с Postgresql
+            database: 'my_database',
+            password: 'hackathon',
+            port: '5432' // Порт Postgreqsl
+        });
+   }
+```
+
+Далее нужно настроить `postgreSQL` 
+
+```
+nano /etc/postgresql/9.5/main/postgresql.conf
+```
+
+Нужно раскоментировать строки и изменить `localhost` на `'*'`
+
+```
+          listen_addresses = 'localhost'
+          password_encryption = on
+```
+    
+Далее нужно разрешить сетевой доступ по IPv4:
+ 
+```
+nano /etc/postgresql/9.5/main/pg_hba.conf
+    Здесь добавить
+    # IPv4 External but internal to cluster connections
+    host    all             all             10.0.0.0/8               md5
+```
+
+Теперь можно перезапустить `postgreSQL`:
+
+```
+    /etc/init.d/postgresql restart
+```
+
+
 **Задание 2: модифицируйте код приложения таким образом, чтобы оно принимало формат json пакетов от вашего мобильного приложения.**
 
 *Обратите внимание, что docker контейнер PostgreSQL использует временное дисковое пространство для размежения файлов БД. Поэтому при удалении или сбое в работе контейнера данные будут потеряны. Чтобы избежать этого, необходимо предоставить контейнеру PostgreSQL доступ к долговременному хранилищу. Более подробно информацию о выделении хранилища в ICP можно найти [тут](https://www.ibm.com/support/knowledgecenter/SS4GSP_6.2.7/com.ibm.udeploy.install.doc/topics/docker_pVolumes.html)*
