@@ -393,3 +393,86 @@ Query Result: 220
 
 * [Управление кластером Kubernetes в IBM Cloud](https://console.bluemix.net/docs/containers/cs_clusters.html#planning_clusters)
 
+
+# День 6 <a name="day6"></a>
+
+## Разработка приложения для доступа к кластеру *Hyperledger Fabric* <a name="71"></a>
+
+Разработаем приложение, которое образается к развернутому нами кластеру `Hyperledger Fabric`. Для этого узнаем `ip` адрес и порты управляющего пода канала (`blockchain-ca`), секвенсера запросов (`blockchain-orderer`) и одного из пиров (`blockchain-org1peer1`). 
+
+```
+$ kubectl get svc
+NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                           AGE
+blockchain-ca          NodePort       172.21.74.249    <none>        30054:30054/TCP                   3d
+blockchain-orderer     NodePort       172.21.235.98    <none>        31010:31010/TCP                   3d
+blockchain-org1peer1   NodePort       172.21.30.78     <none>        30110:30110/TCP,30111:30111/TCP   3d
+blockchain-org2peer1   NodePort       172.21.204.175   <none>        30210:30210/TCP,30211:30211/TCP   3d
+blockchain-org3peer1   NodePort       172.21.243.238   <none>        30310:30310/TCP,30311:30311/TCP   3d
+blockchain-org4peer1   NodePort       172.21.184.139   <none>        30410:30410/TCP,30411:30411/TCP   3d
+kubernetes             ClusterIP      172.21.0.1       <none>        443/TCP                           43d
+mycluster03            LoadBalancer   172.21.155.180   <pending>     2022:32022/TCP                    43d
+```
+
+Данные адреса понадобятся в приложении, которое будет обращаться к кластеру и выполнять тразакции.
+Пример приложение вы можете скачать [тут](https://github.com/maxim218/medicsBlockChain/)
+
+Далее необходимо установить Node.js приложение на Вашем сервере ICP (см. день 4). 
+
+
+Внутри папки **chaincode/fabcar/node** ставим библиотеки NodeJS
+
+```
+npm install
+```
+
+Внутри папки **fabcar** ставим библиотеки NodeJS
+
+```
+npm install
+```
+
+Заходим в папку **fabcar**
+
+```
+cd fabcar
+```
+
+Запускаем fabric
+
+```
+sudo bash ./startFabric.sh node
+```
+
+Добавляем админа
+
+```
+node enrollAdmin.js
+```
+
+Добавляем пользователя
+
+```
+node registerUser.js
+```
+
+Запускаем сервер
+
+```
+npm start
+```
+
+При этом нужно настроить ряд параметров для коммуникации: 
+
+
+![Изменения в настройках приложения](assets/hyperledger_example.png)
+
+Далее вы можете использовать `Python` скрипт. Скрипт может быть запущен как на сервере ICP, так и на машине пользователя. В последнем случае необходимо поменять ip адрес с `Localhost` на адрес сервера.
+
+
+```
+python ./send.py
+```
+
+
+
+
