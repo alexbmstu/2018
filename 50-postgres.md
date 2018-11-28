@@ -377,6 +377,39 @@ nano /etc/postgresql/9.5/main/pg_hba.conf
 
 **Задание 2: модифицируйте код приложения таким образом, чтобы оно принимало формат json пакетов от вашего мобильного приложения.**
 
-*Обратите внимание, что docker контейнер PostgreSQL использует временное дисковое пространство для размежения файлов БД. Поэтому при удалении или сбое в работе контейнера данные будут потеряны. Чтобы избежать этого, необходимо предоставить контейнеру PostgreSQL доступ к долговременному хранилищу. Более подробно информацию о выделении хранилища в ICP можно найти [тут](https://www.ibm.com/support/knowledgecenter/SS4GSP_6.2.7/com.ibm.udeploy.install.doc/topics/docker_pVolumes.html)*
+Обратите внимание, что docker контейнер PostgreSQL использует временное дисковое пространство для размежения файлов БД. Поэтому при удалении или сбое в работе контейнера данные будут потеряны. Чтобы избежать этого, необходимо предоставить контейнеру PostgreSQL доступ к долговременному хранилищу. Более подробно информацию о выделении хранилища в ICP можно найти [тут](https://www.ibm.com/support/knowledgecenter/SS4GSP_6.2.7/com.ibm.udeploy.install.doc/topics/docker_pVolumes.html)
  
+Для создания хранилища каждой команды в `ICP` сделан `PV` для каждой команды размером 4Gi. 
+
+Вы можете создавать claim-запрос ресурса через консоль "Create resource" web gui с помощью следующего yaml (имя team00 и namespace нужно поменять)
+
+```
+{
+  "apiVersion": "v1",
+  "kind": "PersistentVolumeClaim",
+  "metadata": {
+    "name": "team00-pvc",
+    "namespace": "team00",
+    "annotations": {
+      "pv.kubernetes.io/bind-completed": "yes",
+      "pv.kubernetes.io/bound-by-controller": "yes"
+    },
+    "finalizers": [
+      "kubernetes.io/pvc-protection"
+    ]
+  },
+  "spec": {
+    "accessModes": [
+      "ReadWriteMany"
+    ],
+    "resources": {
+      "requests": {
+        "storage": "4Gi"
+      }
+    },
+    "volumeName": "team00-pv-rwm"
+  }
+}
+```
+
 
