@@ -5,7 +5,7 @@
 # Менторы хакатона
 
 
-|   <img src="assets/aleksei_popov.png" width="150"> |  <img src="assets/bader_rasheed.png" width="150">  |  <img src="assets/photo_kmi.png" width="150">  |  <img src="assets/photo_kmi.png" width="150">  |
+|   <img src="assets/aleksei_popov.png" width="150"> |  <img src="assets/bader_rasheed.png" width="150">  |  <img src="assets/photo_kmi.png" width="150">  |  <img src="assets/photo_kni.png" width="150">  |
 |: --------------------------------------- :|: --------------------------------------- :|: --------------------------------------- :|: --------------------------------------- :|
 |   Алексей Юрьевич Попов   <br>   *к.т.н., доцент МГТУ им. Н.Э.Баумана*   <br>   [alexpopov@bmstu.ru](mailto:alexpopov@bmstu.ru)   |   Бадер Рашид    <br>  *магистр, МГТУ им. Н.Э.Баумана* <br> [brasheedengineer@gmail.com](mailto:brasheedengineer@gmail.com)   |   Максим Колотовкин    <br>  *IBM* <br> [maxim.kolotovkin@yandex.ru](mailto:maxim.kolotovkin@yandex.ru)   |   Нина Куклина    <br>  *магистр, МГТУ им. Н.Э.Баумана* <br> [akenoq@yandex.ru](mailto:akenoq@yandex.ru)   |
 
