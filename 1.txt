@@ -933,6 +933,28 @@ router.post('/nutrition', function (req, res) {
 
 ```
 
+!!! В случае возникновения проблем на сервере с парсингом POST запросов от мобильного телефона (например, возникает ошибка в запросе `router.post('/step', function (req, res) `) замените код на следующий (и аналогично для других POST запросов):
+
+```js
+
+app.post('/step', function (req, res) {
+let body = '';
+req.on('data', (data) => {
+body += data;
+}).on('end', () => {
+const dataObj = JSON.parse(body);
+console.log(dataObj);
+// формат: {name: Nick, age: 19}
+const start = dataObj.start;
+const value = dataObj.value;
+res.status(200);
+res.end(JSON.stringify(dataObj));
+});
+});
+
+```
+
+
 Проверьте, что в логах запущенного nodejs появляются сообщения с данными от нашего приложения.
 
 ## Мобильный телефон с iOS <a name="33"></a>
